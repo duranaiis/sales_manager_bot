@@ -1,41 +1,35 @@
-# sales_manager_bot
-AI-powered Telegram bot for sales managers. Built with n8n, OpenAI, Supabase, and a Google Drive-based RAG knowledge system.
+# AI Sales Assistant — Telegram Bot
 
-Overview
+> Deployed in 3 weeks. Reduced manual support load for a sales team of 10+ managers.
 
-1️⃣ `bot_config.json`
-Main Telegram bot workflow:
-- Handles incoming Telegram messages  
-- Uses OpenAI GPT-4o for responses  
-- Connects to Supabase for chat logs and vector storage  
-- Retrieves answers from the RAG database (Google Drive embeddings)  
-- Sends alerts to the admin if the bot lacks information  
+An internal knowledge-base bot for sales managers, powered by RAG (Retrieval-Augmented Generation). 
+Built and shipped end-to-end as part of the GulnurGV product ecosystem.
 
-**Tech stack:**
-- Telegram API  
-- Supabase  
-- OpenAI (GPT-4o / GPT-4o-mini)  
-- PostgreSQL memory  
-- n8n LangChain nodes  
+## My role
+- Gathered requirements from the sales team through structured interviews
+- Scoped the project and defined the knowledge base architecture
+- Coordinated technical implementation and managed delivery timeline
+- Validated bot responses against real sales scenarios before launch
+
+## How it works
+
+**`bot_config.json`** — Main Telegram bot workflow:
+- Handles incoming messages from sales managers
+- Retrieves answers from RAG knowledge base (Google Drive embeddings)
+- Falls back to admin alert if the bot lacks information
+- Logs all interactions to Supabase for quality review
+
+**`google_drive_loader.json`** — Automated sync pipeline:
+- Watches a Google Drive folder for new/updated documents
+- Converts Docs, Sheets, Slides → chunks → embeddings
+- Uploads to Supabase vector store automatically
+
+## Tech stack
+n8n · OpenAI GPT-4o · Supabase (PostgreSQL + Vector) · Telegram API · LangChain · Google Drive API
+
+## Result
+Deployed in 3 weeks from requirements gathering to production. 
+Sales managers can now get instant answers from internal docs without waiting for a human response.
+
 ---
-2️⃣ `google_drive_loader.json`
-Automated pipeline that syncs Google Drive documents with the Supabase vector database.
-
-Workflow:
-- Watches a specific Google Drive folder
-- Downloads new/updated files  
-- Converts Docs, Sheets, Slides → PDF  
-- Extracts text and splits into chunks  
-- Embeds text with OpenAI embeddings  
-- Uploads chunks into Supabase `documents` table  
-
-**Tech stack:**
-- Google Drive Trigger  
-- LangChain Embeddings + Text Splitter  
-- Supabase VectorStore  
----
-🧾 License
-MIT License — open for educational and research use.  
-© 2025 Gulnur GV / Aigerim Adilbekova
-
-⚠️ All sensitive keys and IDs are masked for security reasons.
+⚠️ All API keys and sensitive IDs are masked. Available for educational and research use (MIT).
